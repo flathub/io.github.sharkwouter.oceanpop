@@ -1,6 +1,6 @@
 app-id: io.github.sharkwouter.oceanpop
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 command: oceanpop
 finish-args:
@@ -9,11 +9,19 @@ finish-args:
   - --socket=pulseaudio
   - --socket=wayland
   - --socket=fallback-x11
+cleanup:
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/doc
 modules:
+  - shared-modules/SDL2/SDL2_image.json
+  - shared-modules/SDL2/SDL2_ttf.json
+
   - name: jsoncpp
     buildsystem: meson
     config-opts:
-      - "--default-library=shared"
+      - --default-library=shared
     sources:
       - type: archive
         url: https://github.com/open-source-parsers/jsoncpp/archive/refs/tags/1.9.6.tar.gz
